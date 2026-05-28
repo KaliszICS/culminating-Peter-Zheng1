@@ -61,7 +61,6 @@ public class PracticeProblem extends application{
 
         setupMode = true;
         playerTurn = true;
-
         shipsPlaced = 0;
 
         initializeBoards();
@@ -72,8 +71,18 @@ public class PracticeProblem extends application{
         title.setFont(new Font(16));
 
         Button restartButn = new Button("Restart game");
-        restartButn.setOnAction(e -> restartGame());
+        restartButn.setOnAction(e -> restartGame()); 
+        // -> Lambda operator, used for nameless functions, takes input and does action
 
+        VBox root = new VBox(title, grid, restartButn);
+        
+        //javafx scenes/title
+        Scene scene = new Scene(root, 600, 380);
+        stage.setScene(scene);
+        stage.setTitle("BattleShip");
+        stage.show();
+
+        placeEnemyShips();
         }
 
         //------- Methods-------
@@ -87,7 +96,26 @@ public class PracticeProblem extends application{
 
                 initializeBoards();
 
+                //resets text on buttons &  colors & styles (i.e: removes green, red, and blue)
+                for (int r = 0; r < SIZE; r++){
+                        for (int c = 0; c < SIZE; c++){
+                                playerButtons[r][c].setText("");
+                                playerButtons[r][c].setStyle("");
+
+                                enemyButtons[r][c].setText("");
+                                enemyButtons[r][c].setStyle("");
+
+                                //enables clicking again - removes clicking after you won so must be reset
+                                playerButtons[r][c].setDisable(false);
+                        }       enemyButtons[r][c].setDisable(false);
+                }
+
+                        title.setText("Place 2 ships (Length 2) on left grid");
+
+                        placeEnemyShips();
         }
+
+        
                 //------- Initialize-------
                 public void initializeBoards(){
                         for (int r = 0; r < SIZE; r++){
