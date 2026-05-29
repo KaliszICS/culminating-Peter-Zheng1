@@ -6,7 +6,7 @@
 
         * Date Created: May 26, 2026
 
-        * Date Last Modified: May 26, 2026
+        * Date Last Modified: May 29, 2026
 
         */
 
@@ -86,7 +86,7 @@ public class PracticeProblem extends application{
         }
 
         //------- Methods-------
-        public void restartGame(){
+        public void restartGame(){ // restarts game
                 setupMode = true;
                 playerTurn = true;
                 shipsPlaced = 0;
@@ -124,6 +124,30 @@ public class PracticeProblem extends application{
                                         enemyBoard[r][c] = '~';
                                 }
                         }
+                }
+                //------- Grid -------
+
+                // Player Grid
+                public GridPane createGrid(){
+                        GridPane grid = new GirdPane();
+                
+                        for (int r = 0; r < SIZE; r++){
+                                for (int c = 0; c < SIZE; c++){
+                                        Button butn = new Button();
+                                        butn.setPrefSize(40, 40);
+
+                                        int row = r;
+                                        int col = c;
+
+                                        butn.setAOnAction(e -> placePlayerShip(rol, col));
+
+                                        playerButtons[r][c] = butn;
+                                        grid.add(butn, c, r);
+                                }
+                        }
+
+                        // Enemy Grid
+
                 }
         
         
