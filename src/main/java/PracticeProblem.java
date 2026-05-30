@@ -12,15 +12,21 @@
 
 
 // importing javafx, might add more - temp comment
-import javafx.application.application;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.button;
-import javafx.scene.layout.gridpane;
-import javafx.stage.stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
-import java.util.random;
+import java.util.Random;
 
-public class PracticeProblem extends application{
+public class PracticeProblem extends Application {
 
 
         // Variables
@@ -55,7 +61,7 @@ public class PracticeProblem extends application{
         enemyBoard = new char[SIZE][SIZE];
 
         playerButtons = new Button[SIZE][SIZE];
-        enermyButtons = new Button[SIZE][SIZE];
+        enemyButtons = new Button[SIZE][SIZE];
 
         rand = new Random();
 
@@ -129,7 +135,7 @@ public class PracticeProblem extends application{
 
                 // Player Grid
                 public GridPane createGrid(){
-                        GridPane grid = new GirdPane();
+                        GridPane grid = new GridPane();
                 
                         for (int r = 0; r < SIZE; r++){
                                 for (int c = 0; c < SIZE; c++){
@@ -139,7 +145,7 @@ public class PracticeProblem extends application{
                                         int row = r;
                                         int col = c;
 
-                                        butn.setAOnAction(e -> placePlayerShip(rol, col));
+                                        butn.setOnAction(e -> placePlayerShip(rol, col));
 
                                         playerButtons[r][c] = butn;
                                         grid.add(butn, c, r);
@@ -147,6 +153,23 @@ public class PracticeProblem extends application{
                         }
 
                         // Enemy Grid
+                        for (int r = 0; r < SIZE; r++){
+                                for (int c = 0; c < SIZE; c++){
+
+                                        Button butn = new Button();
+                                        butn.setPrefSize(40, 40);
+
+                                        int row = r;
+                                        int col = c;
+
+                                        butn.setOnAction(e -> attackEnemy(row, col));
+
+                                        enemyButtons[r][c] = butn;
+                                        grid.add(butn, c + 7, r);
+
+                                }
+                        }
+                        return grid;
 
                 }
         
