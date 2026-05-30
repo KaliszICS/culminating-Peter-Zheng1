@@ -113,7 +113,9 @@ public class PracticeProblem extends Application {
 
                                 //enables clicking again - removes clicking after you won so must be reset
                                 playerButtons[r][c].setDisable(false);
-                        }       enemyButtons[r][c].setDisable(false);
+                                enemyButtons[r][c].setDisable(false);
+                        }
+
                 }
 
                         title.setText("Place 2 ships (Length 2) on left grid");
@@ -145,7 +147,7 @@ public class PracticeProblem extends Application {
                                         int row = r;
                                         int col = c;
 
-                                        butn.setOnAction(e -> placePlayerShip(rol, col));
+                                        butn.setOnAction(e -> placePlayerShip(row, col));
 
                                         playerButtons[r][c] = butn;
                                         grid.add(butn, c, r);
@@ -172,7 +174,42 @@ public class PracticeProblem extends Application {
                         return grid;
 
                 }
-        
-        
+        // ------- player attacking ---------
+        public void attackEnemy(int row, int col){
+
+                if (setupMode) return; // if its still in setup mode, stop.
+                if (!playerTurn) return; // if not playerturn, stop.
+
+                if (enemyBoard[row][col] == 'X' || enemyBoard[row][col] == '0') return; // if
+                //  theres a x or 0 stop.
+
+                if (enemyBoard[row][col] == 'S') {
+                        enemyBoard[row][col] = 'X';
+                        enemyButtons[row][col].setText("X");
+                        enemyButtons[row][col].setStyle("-fx-background-color: lightblue;")
+                }
+
+                else {
+                        enemyBoard[row][col] = '0';
+                        enemyButtons[row][col].setText("0");
+                        enemyButtons[row][col].setStyle("-fx-background-color: lightblue;");
+                }
+
+                if (checkWin(enemyBoard)) {
+                        showWin("You win!");
+                        return;
+                }
+                
+                playerTurn = false;
+                
+
+        }
+        public void checkWin(char[][] board){
+
+        }
+
+        public void showWin(String message){
+
+        }
         
 }
